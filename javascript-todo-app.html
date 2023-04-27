@@ -63,27 +63,32 @@
         var myList = document.getElementById("todo-list");
     
         json_data.forEach(element => {
+            newTodo(element.title);
+        });
+        var closeButtons = document.getElementsByClassName("delete");
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].addEventListener('click', deleteTodo, false);
+        }
+        function deleteTodo() {
+            var li = this.parentElement;
+            myList.removeChild(li);
+        }
+        function newTodo(todoTitle) {
+            if (!todoTitle) {
+                todoTitle = document.getElementById("todoTitle").value;
+            }
             var listItem = document.createElement("li");
             listItem.appendChild(
-                document.createTextNode(element.title)
+                document.createTextNode(todoTitle)
             );
             var deleteLink = document.createElement("a");
-    
-            deleteLink.href = "#";
+            deleteLink.href = "a";
             deleteLink.className = "btn btn-sm btn-danger m-1 delete";
             deleteLink.appendChild(
                 document.createTextNode("Delete")
             );
             listItem.appendChild(deleteLink);
             myList.appendChild(listItem);
-        });
-        var closeButtons = document.getElementsByClassName("delete");
-        for (var i = 0; i <- closeButtons.length; i++) {
-            closeButtons[i].addEventListener('click', deleteTodo, false);
-        }
-        function deleteTodo() {
-            var li = this.parentElement;
-            myList.removeChild(li);
         }
     </script>
 </body>
