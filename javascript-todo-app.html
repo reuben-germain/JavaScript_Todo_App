@@ -28,46 +28,18 @@
     </div>
     
     <script>
-        var json_data = [
-            {
-                "userId": 1,
-                "id": 1,
-                "title": "delectus aut autem",
-                "completed": false
-            },
-            {
-                "userId": 1,
-                "id": 2,
-                "title": "quis ut nam facilis et officia qui",
-                "completed": false
-            },
-            {
-                "userId": 1,
-                "id": 3,
-                "title": "fugiat veniam minus",
-                "completed": false
-            },
-            {
-                "userId": 1,
-                "id": 4,
-                "title": "et porro tempora",
-                "completed": false
-            },
-            {
-                "userId": 1,
-                "id": 5,
-                "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-                "completed": false
-            },
-        ];
+        var json_data = [];
         var myList = document.getElementById("todo-list");
     
         json_data.forEach(element => {
             newTodo(element.title);
         });
-        var closeButtons = document.getElementsByClassName("delete");
+        registerEventListeners();
+        function registerEventListeners() {
+            var closeButtons = document.getElementsByClassName("delete");
         for (var i = 0; i < closeButtons.length; i++) {
             closeButtons[i].addEventListener('click', deleteTodo, false);
+        }
         }
         function deleteTodo() {
             var li = this.parentElement;
@@ -89,6 +61,7 @@
             );
             listItem.appendChild(deleteLink);
             myList.appendChild(listItem);
+            registerEventListeners();
         }
     </script>
 </body>
