@@ -104,8 +104,10 @@
             return todoID
         }
         function deleteAllTodos() {
-            localStorage.removeItem('json_data');
-            myList.innerHTML = '';
+            if (confirm("Are you sure you want to delete all of your Todos?")) {
+                localStorage.removeItem('json_data');
+                myList.innerHTML = '';
+            }
         }
     </script>
 </body>
