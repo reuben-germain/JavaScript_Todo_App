@@ -53,6 +53,7 @@
         function newTodo(todoTitle) {
             if (!todoTitle) {
                 todoTitle = document.getElementById("todoTitle").value;
+                storeTodoLocal(todoTitle);
             }
             var listItem = document.createElement("li");
             listItem.appendChild(
@@ -69,6 +70,23 @@
             registerEventListeners();
             console.log("new todo added");
             console.log(listItem);
+        }
+        function storeTodoLocal(todoTitle) {
+            //retrieve and parse existing JSON from localstorage
+            var json_temp = JSON.parse( localStorage.getItem('json_data') );
+            if (!json_temp) {
+                json_temp = [];
+            }
+            // add new todo object to JSON
+            json_temp.push({
+                "title": todoTitle,
+                "completed": false
+            });
+            // log updated JSON to console
+            console.log(json_temp);
+            // stringify updated JSON and store back in localStorage
+            localStorage.setItem('json_data', JSON.stringify(json_temp)
+            );
         }
     </script>
 </body>
