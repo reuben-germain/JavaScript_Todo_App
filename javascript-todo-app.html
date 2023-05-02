@@ -36,7 +36,9 @@
     
         if (json_data) {
             json_data.forEach(element => {
-                newTodo(element.title);
+                if (element) {
+                    newTodo(element.title, element.id);
+                }
             });
         }
         registerEventListeners();
@@ -50,6 +52,7 @@
             var li = this.parentElement;
             myList.removeChild(li);
             var json_temp = JSON.parse( localStorage.getItem('json_data'));
+            delete json_temp['li.dataset.id'];
             // how do we delete the item from json_temp without a unique identifier?
             localStorage.setItem('json_data',
             JSON.stringify(json_temp)
@@ -83,8 +86,11 @@
             if (!json_temp) {
                 json_temp = [];
             }
+            // creating a new todo ID based on length of existing localstorage array
+            var todoID = json_temp.length;
             // add new todo object to JSON
             json_temp.push({
+                "id": todoID,
                 "title": todoTitle,
                 "completed": false
             });
@@ -93,6 +99,8 @@
             // stringify updated JSON and store back in localStorage
             localStorage.setItem('json_data', JSON.stringify(json_temp)
             );
+            // return ID of new todo
+            return todoID
         }
     </script>
 </body>
