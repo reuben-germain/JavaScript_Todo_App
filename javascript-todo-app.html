@@ -49,13 +49,19 @@
         function deleteTodo() {
             var li = this.parentElement;
             myList.removeChild(li);
+            var json_temp = JSON.parse( localStorage.getItem('json_data'));
+            // how do we delete the item from json_temp without a unique identifier?
+            localStorage.setItem('json_data',
+            JSON.stringify(json_temp)
+            );
         }
-        function newTodo(todoTitle) {
-            if (!todoTitle) {
+        function newTodo(todoTitle, todoID) {
+            if (!todoTitle && !todoID) {
                 todoTitle = document.getElementById("todoTitle").value;
-                storeTodoLocal(todoTitle);
+                var todoID = storeTodoLocal(todoTitle);
             }
             var listItem = document.createElement("li");
+            listItem.dataset.id = todoID;
             listItem.appendChild(
                 document.createTextNode(todoTitle)
             );
